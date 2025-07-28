@@ -1,8 +1,14 @@
 const map = L.map('map').setView([14.0723, -87.1921], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19
-}).addTo(map);
+const customIcon = L.icon({
+    iconUrl: '/static/icono_gps.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+});
+
+L.marker([device.lat, device.lon], { icon: customIcon }).addTo(map);
+
 
 async function loadPositions() {
   const response = await fetch('/api/positions');
