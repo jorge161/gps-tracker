@@ -6,9 +6,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const customIcon = L.icon({
   iconUrl: '/static/icono_gps.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
+  iconSize: [60, 60],
+  iconAnchor: [60, 60],
+  popupAnchor: [0, -80]
 });
 
 async function loadPositions() {
