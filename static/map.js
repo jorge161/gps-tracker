@@ -8,7 +8,7 @@ const customIcon = L.icon({
   iconUrl: '/static/icono_gps.png',
   iconSize: [60, 60],
   iconAnchor: [60, 60],
-  popupAnchor: [0, -80]
+  popupAnchor: [0, -32]
 });
 
 async function loadPositions() {
