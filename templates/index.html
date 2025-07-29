@@ -34,5 +34,37 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/static/map.js"></script>
+  
+  <!-- Modal de Alerta -->
+<div id="alertModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>🚨 Alerta de Intrusión</h2>
+    <p id="modalDetails"></p>
+    <button id="dismissBtn">Eliminar Alarma</button>
+    <button onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
+<style>
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+}
+.modal.hidden {
+  display: none;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+</style>
+
+
 </body>
 </html>
