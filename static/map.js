@@ -1,7 +1,6 @@
 const map = L.map('map').setView([14.0723, -87.1921], 13);
 let markers = [];
 
-
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
@@ -14,7 +13,6 @@ const customIcon = L.icon({
 });
 
 const notifiedEvents = new Set();  // Para evitar repetir alertas
-const markers = []; // Para limpiar marcadores si es necesario más adelante
 
 async function loadPositions() {
   // Limpiar marcadores previos
@@ -51,23 +49,13 @@ async function loadPositions() {
       // Icono normal
       const marker = L.marker([d.lat, d.lon], { icon: customIcon }).addTo(map)
         .bindPopup(`<b>${d.device_id}</b><br>${d.event}<br>${d.timestamp}`);
-
       markers.push(marker);
     }
   });
 }
 
-
-
-const notifiedEvents = new Set(); // Para recordar qué intrusiones ya se notificaron
-
-
-
-
 loadPositions();
-
 setInterval(loadPositions, 10000); // cada 10 segundos
-
 
 function showModal(data, marker) {
   const modal = document.getElementById('alertModal');
@@ -99,6 +87,3 @@ function showModal(data, marker) {
 function closeModal() {
   document.getElementById('alertModal').classList.add('hidden');
 }
-
-
-
