@@ -7,6 +7,27 @@
   <style>
     #map { height: 100vh; width: 100vw; }
   </style>
+  <style>
+  #map { height: 100vh; width: 100vw; }
+
+  .alert-circle {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+    opacity: 0.8;
+    border: 2px solid white;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+  }
+</style>
+  
+
 </head>
 <body>
   <div id="map"></div>
