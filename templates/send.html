@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Envío GPS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f5f5f5;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px;
+      font-size: 1em;
+      background: #1976d2;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .success, .error {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .success {
+      background: #c8e6c9;
+      color: #2e7d32;
+    }
+    .error {
+      background: #ffcdd2;
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <h2>Simular Envío de Datos GPS</h2>
+  <form id="gpsForm">
+    <input type="text" name="device_id" placeholder="ID del dispositivo" required>
+    <input type="number" step="any" name="latitude" placeholder="Latitud" required>
+    <input type="number" step="any" name="longitude" placeholder="Longitud" required>
+    <input type="text" name="event" placeholder="Evento (Ej: Intrusion)" required>
+    <button type="submit">Enviar Datos</button>
+  </form>
+
+  <div id="response" class=""></div>
+
+  <script>
+    const form = document.getElementById('gpsForm');
+    const responseDiv = document.getElementById('response');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = {
+        device_id: formData.get('device_id'),
+        latitude: parseFloat(formData.get('latitude')),
+        longitude: parseFloat(formData.get('longitude')),
+        event: formData.get('event')
+      };
+
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        responseDiv.textContent = "✅ Datos enviados correctamente.";
+        responseDiv.className = "success";
+        form.reset();
+      } else {
+        const errorText = await res.text();
+        responseDiv.textContent = `❌ Error: ${errorText}`;
+        responseDiv.className = "error";
+      }
+    });
+  </script>
+</body>
+</html>

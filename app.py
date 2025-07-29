@@ -16,6 +16,10 @@ class GpsData(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     event = db.Column(db.String(100))
 
+@app.route("/simulator")
+def simulator():
+    return render_template("send.html")
+
 @app.route('/')
 def index():
     print("Ruta raíz solicitada")
